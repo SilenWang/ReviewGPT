@@ -1,3 +1,5 @@
 conda/
-src/config.py
+utils/config.py
 *__pycache__*
+*pynecone.db*
+.web
