@@ -1,4 +1,5 @@
 from Bio import Entrez
+from config import EMAIL
 
 
 class PubMedFetcher:
@@ -6,7 +7,7 @@ class PubMedFetcher:
         self.email = email
         self.pmids = pmids
 
-    def fetch(self):
+    def fetch_abstract(self):
         # 设置email和搜索关键词
         Entrez.email = self.email
 
@@ -28,10 +29,9 @@ class PubMedFetcher:
 if __name__ == '__main__':
 
     # 设置邮箱地址，提供给NCBI用于联系
-    email = "silenseek14@gmail.com"
 
     id_list = [26502953, 19016404, 25837277, 34209617, 35602107]
 
-    fetcher = PubMedFetcher(email=email, pmids=id_list)
+    fetcher = PubMedFetcher(email=EMAIL, pmids=id_list)
 
-    print(fetcher.fetch())
+    print(fetcher.fetch_abstract())
