@@ -1,5 +1,5 @@
 from Bio import Entrez
-from config import EMAIL
+from utils.config import EMAIL
 
 
 class PubMedFetcher:
@@ -12,13 +12,15 @@ class PubMedFetcher:
         Entrez.email = self.email
 
         # 使用文章ID批量获取文章的题录和摘要信息
-        handle = Entrez.efetch(db="pubmed", id=id_list, rettype="abstract", retmode="xml")
+        handle = Entrez.efetch(db="pubmed", id=self.pmids, rettype="abstract", retmode="xml")
         fetch_record = Entrez.read(handle)
 
+        print(self.pmids)
+
         articles = []
-        for i, rec in enumerate(fetch_record["PubmedArticle"]):
+        for idx, rec in enumerate(fetch_record["PubmedArticle"]):
             articles.append({
-                'PMID': id_list[i],
+                'PMID': self.pmids[idx],
                 'Title': rec["MedlineCitation"]["Article"]["ArticleTitle"],
                 'Abstract': rec["MedlineCitation"]["Article"]["Abstract"]["AbstractText"][0] if "Abstract" in rec["MedlineCitation"]["Article"] else ""
             })

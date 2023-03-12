@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # import tiktoken
-from config import API_KEY, MODEL, Promots
+from utils.config import API_KEY, MODEL, Promots
 import openai
 from json import dump, loads
 
