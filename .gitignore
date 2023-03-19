@@ -1,5 +1,6 @@
 conda/
 utils/config.py
+*test*
 *__pycache__*
 *pynecone.db*
 .web

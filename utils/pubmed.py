@@ -7,6 +7,7 @@ class PubMedFetcher:
         self.email = email
         self.pmids = pmids
 
+
     def fetch_abstract(self):
         # 设置email和搜索关键词
         Entrez.email = self.email
@@ -15,7 +16,7 @@ class PubMedFetcher:
         handle = Entrez.efetch(db="pubmed", id=self.pmids, rettype="abstract", retmode="xml")
         fetch_record = Entrez.read(handle)
 
-        print(self.pmids)
+        # print(self.pmids)
 
         articles = []
         for idx, rec in enumerate(fetch_record["PubmedArticle"]):
