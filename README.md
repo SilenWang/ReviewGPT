@@ -19,7 +19,7 @@
   + [ ] 增加原始解析数据下载按钮
   + [x] 页面布局优化
 - 后端: 
-  + [ ] 调用chatGPT的API进行内容综述
+  + [x] 调用chatGPT的API进行内容综述
   + [x] 调用chatGPT的API进行文献内容准入判断(Meta分析用)
   + [x] 调用biopython的API从PUBMED获取文献题录及摘要
   + [ ] 原始解析数据保存并打包
