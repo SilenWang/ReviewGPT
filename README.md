@@ -6,25 +6,32 @@
 
 - 文献准入判断:
 
-![run](img/run.gif)
+<!-- ![run](img/run.gif) -->
 
 ![demo](img/demo.png)
 
 ## 规划内容
 
-- 前端: 使用pynecone构建Web APP
-  + [x] 一个勉强能用的基本App
+
+- 可能是处于项目早期, pynecone开发中出现过若干问题, 为了更快的开发, 转用gradio进行实现, 后续再考虑用别的框架来写
+
+- 前端: 使用gradio构建简易WebAPP
+  + [ ] 一个勉强能用的基本App
   + [ ] 前端设置API_KEY(安全问题咋保证?)
-  + [ ] 部署到`pynecone.app`
   + [ ] 增加原始解析数据下载按钮
-  + [x] 页面布局优化
+  + [ ] 内容综述功能实装
+  + [ ] 增加About页
+  + [ ] 增加使用说明(具体怎么加没想好)
 - 后端: 
   + [x] 调用chatGPT的API进行内容综述
   + [x] 调用chatGPT的API进行文献内容准入判断(Meta分析用)
   + [x] 调用biopython的API从PUBMED获取文献题录及摘要
   + [ ] 原始解析数据保存并打包
+    * 这里有涉及数据安全问题, 需要了解下返回的id是否会导致Key泄露? 
   + [ ] ~~增加内容准入判断的多次重复(检查结果是否稳定)~~
   + [x] 增加RIS文件上传解析的支持
+  + [ ] 增加chatGPT以外的模型支持(如chatGLM, moss, LLaMA)
+  + [ ] 学习[ResearchGPT](https://github.com/mukulpatnaik/researchgpt)的内容, 增加类似的功能
 
 ## 其他
 
