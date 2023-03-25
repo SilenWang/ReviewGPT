@@ -1,10 +1,11 @@
 # ReviewGPT
 
-科研人员日常需要对进行大量的文献阅读以跟进最新的研究进度, 但是研究结果的碎片化程度比Linux发行版更甚, 这一定程度上拖慢了科研工作的速度, 本项目旨在利用chatGPT完成一些科研文献检索, 阅读过程中的工作, 使相关工作能更快速高效.
+Researchers need to read a large amount of literature every day to keep up with the latest research progress, but the fragmentation of research results is even worse than that of Linux distributions, which slows down research work to some extent. This project aims to use ChatGPT to perform some scientific literature retrieval and work during the reading process, so that related work can be faster and more efficient.
 
-## 运行展示
 
-- 文献准入判断:
+## Demo
+
+- Literature entry judgment:
 
 <!-- ![run](img/run.gif) -->
 
@@ -13,40 +14,40 @@
 ## 规划内容
 
 
-- 前端: 使用gradio构建简易WebAPP
-  + [x] 一个勉强能用的基本App
-  + [x] 前端设置API_KEY(安全问题咋保证?)
-  + [ ] 增加原始解析数据下载按钮(json)
-  + [ ] 内容综述功能实装
-  + [ ] 增加About页
-  + [ ] 增加使用说明(具体怎么加没想好)
-  + [ ] 增加单文献阅读的页面
-- 后端: 
-  + [x] 调用chatGPT的API进行内容综述
-  + [x] 调用chatGPT的API进行文献内容准入判断(Meta分析用)
-  + [x] 调用biopython的API从PUBMED获取文献题录及摘要
-  + [ ] 原始解析数据保存并打包
-    * 这里有涉及数据安全问题, 需要了解下返回的id是否会导致Key泄露? 
-  + [ ] ~~增加内容准入判断的多次重复(检查结果是否稳定)~~
-  + [x] 增加RIS文件上传解析的支持
-  + [ ] 增加chatGPT以外的模型支持
+- Frontend:
+  + [x] A basic app but usable app
+  + [x] Setting key from frontend
+  + [ ] Add a download button for raw parsing data(json) 
+  + [ ] Implementation of content summary function
+  + [ ] The About page
+  + [ ] Add usage instructions
+  + [ ] Add a page for reading single paper
+- Backend: 
+  + [x] Call the chatGPT API for content summarization
+  + [x] Call the chatGPT API for literature content access judgment (for meta-analysis)
+  + [x] Call the biopython API to obtain literature bibliographic information and abstracts from PUBMED
+  + [ ] Save and package raw parsing data
+    * Data security issues here, necessary to understand whether the returned id will cause Key leakage 
+  + [ ] ~~Add multiple repetitions of content access judgment (check whether the result is stable)~~
+  + [x] RIS file upload and parsing support
+  + [ ] Support for models other than chatGPT
     + [ ] chatGLM
     + [ ] moss
     + [ ] LLaMA
-  + [ ] 增加单文献阅读的功能
-  + [ ] 增加现有功能的API
-- 参考学习:
-  + [ ] 学习[ResearchGPT](https://github.com/mukulpatnaik/researchgpt)的内容, 增加类似的功能
-  + [ ] 学习[chatPaper](https://github.com/kaixindelele/ChatPaper)的内容, 增加类似的功能
-  + [ ] 尝试构建个[chatPDF](https://www.chatpdf.com/)类似的功能
-- 杂项:
-  - [ ] 英文README
-  - [ ] 准备Dockfile, 构建容器
-  - [ ] 准备HuggingFace Demo
+  + [ ] Add the function of reading single paper
+  + [ ] Add APIs for existing feature
+- Reference learning:
+  + [ ] Learn the content of[ResearchGPT](https://github.com/mukulpatnaik/researchgpt) and add similar function
+  + [ ] Learn the content of[chatPaper](https://github.com/kaixindelele/ChatPaper) and add similar function
+  + [ ] Try build something like [chatPDF](https://www.chatpdf.com/)
+- Others:
+  - [x] Enhlish README
+  - [ ] Dockfile for container building
+  - [ ] A HuggingFace demo
 
 ## 问题记录
 
-- 本项目最初采用pynecone开发, 但是碰到了若干影响使用/观感的问题, 因此最后转到了gradio
-  - pynecone启动后CPU持续占用
-  - 目前上传文件功能不是特别好用, 必须要用按钮或其他内容来触发上传(没找到如何实现拖拽即上传)
-  - 上传文件后, 进行其他操作会使得已显示的文件名丢失
+- This project was initially developed using Pynecone, but encountered several problems that affected its use/appearance, so it was finally switched to Gradio.
+  + pynecone continues to occupy the CPU after startup.
+  + Currently, the file upload function is not very user-friendly, and you must use buttons or other content to trigger the upload (I have not found how to implement drag and drop upload).
+  + After uploading the file, performing other operations will cause the displayed file name to be lost.
