@@ -27,7 +27,7 @@ def get_paper_info(inputMethod, email=None, pmids=None, ris_data=None):
     return paper_info
 
 
-def review_process(task, paper_info, prompts, openai_key, review_model):
+def review(task, paper_info, prompts, openai_key, review_model):
     '''
     调用已有函数进行文献工作:
     1. 文献纳入判断(基于摘要)
@@ -61,17 +61,13 @@ def review_process(task, paper_info, prompts, openai_key, review_model):
         return '\n\n------------------------\n\n'.join(answers)
     
     elif task == 'Summarise':
-        return 'Summarise Task Under Development Now'
-
-
-def review(
-    inputMethod, task, prompts, pmids=None, risFile=None,
-    email=None, openai_key=None, review_model=None
-    ):
-    '''
-    review任务的函数:
-    step1: 解析必要文件信息
-    step2: 进行review
-    '''
-    paper_info = get_paper_info(inputMethod, email, pmids, risFile)
-    return review_process(task, paper_info, prompts, openai_key, review_model)
+        papers = []
+        for _, rec in paper_info.iterrows():
+            if 'PMID' in rec:
+                papers.append((rec['PMID'], rec['Abstract']))
+            elif 'DOI' in rec:
+                papers.append((rec['DOI'], rec['Abstract']))
+            else:
+                raise Exception('No PMID nor DOI in record.')
+        response = reviewer.summarise(papers)
+        return response['choices'][0]['message']['content']

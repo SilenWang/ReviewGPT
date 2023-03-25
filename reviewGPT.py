@@ -30,14 +30,14 @@ with gr.Blocks() as reviewGPT:
         with gr.Row():       # 行排列
             with gr.Column():    # 列排列
                 gr.Markdown('### Data Input')
-                inputForm = gr.Radio(
+                input_form = gr.Radio(
                     ["PMID", "RIS File"], label="Select Input Form"
                 )
                 pmids = gr.Textbox(label="Input PMIDs", lines=9, visible=True, interactive=True)
-                risFile = gr.File(label="Please Select Ris File", visible=False, file_types=['.ris'], type='binary')
+                ris_file = gr.File(label="Please Select Ris File", visible=False, file_types=['.ris'], type='binary')
                 # 不同选择时切换内容
-                inputForm.change(fn=lambda form: gr.update(visible=(form=='PMID')), inputs=inputForm, outputs=pmids)
-                inputForm.change(fn=lambda form: gr.update(visible=(form=='RIS File')), inputs=inputForm, outputs=risFile)
+                input_form.change(fn=lambda form: gr.update(visible=(form=='PMID')), inputs=input_form, outputs=pmids)
+                input_form.change(fn=lambda form: gr.update(visible=(form=='RIS File')), inputs=input_form, outputs=ris_file)
             with gr.Column():    # 列排列
                 gr.Markdown('### Task Setting')
                 task_choice = gr.Radio(
@@ -47,11 +47,15 @@ with gr.Blocks() as reviewGPT:
         start = gr.Button(value='REVIEW START')
         out = gr.Markdown(label='Review Result')
 
-        start.click(fn=task.review, inputs=[
-            inputForm, task_choice, prompts, pmids, risFile, 
-            share_settings['EMAIL'],
-            share_settings['OPENAI_KEY'], 
-            share_settings['REVIEW_MODEL'],
+        def run_review(input_form, task_choice, prompts, pmids, ris_file, share_settings):
+            '''
+            click触发进行文献阅读
+            '''
+            paper_info = task.get_paper_info(input_form, share_settings['EMAIL'], pmids, ris_file)
+            return task.review(task_choice, paper_info, prompts, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
+
+        start.click(fn=run_review, inputs=[
+            input_form, task_choice, prompts, pmids, ris_file, share_settings
         ], outputs=out)
     
     with gr.Tab("Setting"):

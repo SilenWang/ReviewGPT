@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # import tiktoken
-from utils.config import Prompts, API_KEY, REVIEW_MODEL
+from utils.config import Prompts, OPENAI_KEY, REVIEW_MODEL
 import openai
 from json import dump, loads
 
@@ -35,7 +35,7 @@ class Reviewer:
     2. 文献内容判断, 根据自定义的Promot判断, 文献是否符合准入标准
     '''
     def __init__(self, api_key=None, model=None):
-        self.api_key = api_key if api_key else API_KEY
+        self.api_key = api_key if api_key else OPENAI_KEY
         self.model = model if model else REVIEW_MODEL
         self.messages = None
 
