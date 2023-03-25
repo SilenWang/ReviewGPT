@@ -2,23 +2,24 @@
 
 Researchers need to read a large amount of literature every day to keep up with the latest research progress, but the fragmentation of research results is even worse than that of Linux distributions, which slows down research work to some extent. This project aims to use ChatGPT to perform some scientific literature retrieval and work during the reading process, so that related work can be faster and more efficient.
 
-
 ## Demo
 
-- Literature entry judgment:
+- Screen:
 
-<!-- ![run](img/run.gif) -->
+![demo](img/screen.png)
 
-![demo](img/demo.png)
+- Summarise:
+
+![demo](img/summarise.png)
+
 
 ## ToDo
-
 
 - Frontend:
   + [x] A basic app but usable app
   + [x] Setting key from frontend
   + [ ] Add a download button for raw parsing data(json) 
-  + [ ] Implementation of content summary function
+  + [x] Implementation of content summarise function
   + [ ] The About page
   + [ ] Add usage instructions
   + [ ] Add a page for reading single paper
@@ -27,7 +28,7 @@ Researchers need to read a large amount of literature every day to keep up with 
   + [x] Call the chatGPT API for literature content access judgment (for meta-analysis)
   + [x] Call the biopython API to obtain literature bibliographic information and abstracts from PUBMED
   + [ ] Save and package raw parsing data
-    * Data security issues here, necessary to understand whether the returned id will cause Key leakage 
+    * ~~Data security issues here, necessary to understand whether the returned id will cause Key leakage ~~
   + [ ] ~~Add multiple repetitions of content access judgment (check whether the result is stable)~~
   + [x] RIS file upload and parsing support
   + [ ] Support for models other than chatGPT
