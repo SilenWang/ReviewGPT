@@ -1,6 +1,7 @@
 import gradio as gr
 from utils import task
 import utils.config as conf
+from datetime import datetime
 
 
 # 定义
@@ -45,7 +46,7 @@ with gr.Blocks() as reviewGPT:
                 )
                 prompts = gr.Textbox(label="Input Prompts", lines=9, interactive=True)
         start = gr.Button(value='REVIEW START')
-        out = gr.Markdown(label='Review Result')
+        out = gr.Markdown()
 
         def run_review(input_form, task_choice, prompts, pmids, ris_file, share_settings):
             '''
@@ -75,6 +76,7 @@ with gr.Blocks() as reviewGPT:
             email = gr.Textbox(label='Email' , value=None, interactive=True)
 
         commit = gr.Button(value='Commit Setting')
+        notice = gr.Markdown()
 
         # 虽然这个定义的位置比较奇怪, 但这是官方例子的写法...
         def update_config(openai_key: str, review_model: str, email: str, settings):
@@ -83,10 +85,16 @@ with gr.Blocks() as reviewGPT:
             '''
             params = {k.upper(): v for k, v in locals().items() if (k != 'settings' and v != None)}
             settings.update(params)
-            print(settings)
-            return settings
+            return {
+                share_settings: settings,
+                notice: f'Setting Updated at {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'
+            }
 
-        commit.click(fn=update_config, inputs=[openai_key, review_model, email, share_settings], outputs=share_settings)
+        commit.click(
+            fn=update_config,
+            inputs=[openai_key, review_model, email, share_settings],
+            outputs=[share_settings, notice]
+        )
 
 
 reviewGPT.launch()
