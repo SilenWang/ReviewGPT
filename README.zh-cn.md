@@ -42,7 +42,7 @@
   + [ ] 学习[chatPaper](https://github.com/kaixindelele/ChatPaper)的内容, 增加类似的功能
   + [ ] 尝试构建个[chatPDF](https://www.chatpdf.com/)类似的功能
 - 杂项:
-  - [ ] 英文README
+  - [x] 英文README
   - [ ] 准备Dockfile, 构建容器
   - [ ] 准备HuggingFace Demo
 
