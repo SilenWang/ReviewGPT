@@ -3,8 +3,8 @@ from utils.config import EMAIL
 
 
 class PubMedFetcher:
-    def __init__(self, email, pmids):
-        self.email = email
+    def __init__(self, email=None, pmids):
+        self.email = email if email else EMAIL
         self.pmids = pmids
 
 
