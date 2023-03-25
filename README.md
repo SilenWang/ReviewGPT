@@ -11,7 +11,7 @@ Researchers need to read a large amount of literature every day to keep up with 
 
 ![demo](img/demo.png)
 
-## 规划内容
+## ToDo
 
 
 - Frontend:
@@ -45,7 +45,7 @@ Researchers need to read a large amount of literature every day to keep up with 
   - [ ] Dockfile for container building
   - [ ] A HuggingFace demo
 
-## 问题记录
+## Problems
 
 - This project was initially developed using Pynecone, but encountered several problems that affected its use/appearance, so it was finally switched to Gradio.
   + pynecone continues to occupy the CPU after startup.
