@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # import tiktoken
-from utils.config import Prompts, OPENAI_KEY, REVIEW_MODEL
 import openai
 from json import dump, loads
+
+try:
+    from utils.config import Prompts, OPENAI_KEY, REVIEW_MODEL
+except ImportError:
+    from utils.config_sample import Prompts, OPENAI_KEY, REVIEW_MODEL
 
 # def num_tokens_from_messages(messages, model="gpt-3.5-turbo-0301"):
 #     '''

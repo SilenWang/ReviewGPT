@@ -1,20 +1,25 @@
 # 填写从openai获取的API Key
-API_KEY = 'sk-YOUR_OPENAI_KEY'
+OPENAI_KEY = 'sk-YOUR_OPENAI_KEY'
 
 # 使用的语言模型
-MODEL = "gpt-3.5-turbo"
+REVIEW_MODEL = "gpt-3.5-turbo"
 
 # 进行Pubmed文献获取需要的邮箱
 EMAIL = "YOUR@MAIL.COM"
 
 # 预设的Promots, 目前用来实现的功能有两个
-Promots = {
-    'Summarize': '',
+Prompts = {
+    'Summarize': '小结 #1-#{idx} 的内容, 并小结不同参考文献的异同, 请用中文给出回答',
+    'Summarize_Unit': '''
+        将编号为{idx}的文献标记为参考文献 #1, 将后续的文段标记为 #1 的摘要.
+        {abstract}
+    ''',
+    
     # 进行meta时的标准肯定是变化的, 因此这个功能的Promot主要是用于功能上的限定
     # 1. 限制回答方式为json格式的字符串, 方便解析
     # 2. 限制chatGPT逐一检查要检查的问题, 并在认为不符合标准时给出不符合哪一条
     # 3. 限制chatGPT尝试拼接语义正确但是内容不正确的回答, 让它在无法判定时直接说明难以判断, 交给人工判断
-    'Criteria': '''
+    'Screen': '''
         请你扮演一位研究者, 你接下来将要进行一向Meta分析, 因此需要逐一篇文献摘要, 并对摘要内容进行理解, 
         以判断文献是否满足Meta分析的准入标准, 可以用于后续分析. 在阅读时, 你需要对后面给出的每一条准入标准逐
         一进行判断, 如果文献的摘要不满足任意一条标准, 那么需要给出你认为摘要不满足标准的原因.

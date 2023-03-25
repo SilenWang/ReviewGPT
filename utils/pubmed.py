@@ -1,5 +1,9 @@
 from Bio import Entrez
-from utils.config import EMAIL
+
+try:
+    from utils.config import EMAIL
+except ImportError:
+    from utils.config_sample import EMAIL
 
 
 class PubMedFetcher:

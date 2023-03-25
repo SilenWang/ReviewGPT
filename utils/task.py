@@ -1,9 +1,10 @@
-from utils.review import Reviewer
-from utils.pubmed import PubMedFetcher
-from utils.ris_parser import RisFile
 from json import loads
 import pandas as pd
 import io
+
+from utils.review  import Reviewer
+from utils.pubmed  import PubMedFetcher
+from utils.ris_parser  import RisFile
 
 
 def get_paper_info(inputMethod, email=None, pmids=None, ris_data=None):

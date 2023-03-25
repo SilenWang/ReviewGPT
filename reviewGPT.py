@@ -1,7 +1,11 @@
 import gradio as gr
-from utils import task
-import utils.config as conf
 from datetime import datetime
+from utils import task
+
+try:
+    import utils.config as conf
+except ImportError:
+    import utils.config_sample as conf
 
 
 # 定义
