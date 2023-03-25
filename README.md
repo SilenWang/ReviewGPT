@@ -1,3 +1,15 @@
+---
+title: ReviewGPT
+emoji: 🦀
+colorFrom: purple
+colorTo: blue
+sdk: gradio
+sdk_version: 3.23.0
+app_file: reviewGPT.py
+pinned: true
+license: mit
+---
+
 # ReviewGPT
 
 Researchers need to read a large amount of literature every day to keep up with the latest research progress, but the fragmentation of research results is even worse than that of Linux distributions, which slows down research work to some extent. This project aims to use ChatGPT to perform some scientific literature retrieval and work during the reading process, so that related work can be faster and more efficient.
