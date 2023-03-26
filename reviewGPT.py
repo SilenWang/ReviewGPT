@@ -36,7 +36,7 @@ with gr.Blocks() as reviewGPT:
             with gr.Column():    # 列排列
                 gr.Markdown('### Data Input')
                 input_form = gr.Radio(
-                    ["PMID", "RIS File"], label="Select Input Form"
+                    ["PMID", "RIS File"], value = "PMID", label="Select Input Form",
                 )
                 pmids = gr.Textbox(label="Input PMIDs", lines=9, visible=True, interactive=True)
                 ris_file = gr.File(label="Please Select Ris File", visible=False, file_types=['.ris'], type='binary')
@@ -46,7 +46,7 @@ with gr.Blocks() as reviewGPT:
             with gr.Column():    # 列排列
                 gr.Markdown('### Task Setting')
                 task_choice = gr.Radio(
-                    ["Screen", "Summarise"], label="Select a Task"
+                    ["Screen", "Summarise"], value = "Screen", label="Select a Task"
                 )
                 prompts = gr.Textbox(label="Input Prompts", lines=9, interactive=True)
         start = gr.Button(value='REVIEW START')
