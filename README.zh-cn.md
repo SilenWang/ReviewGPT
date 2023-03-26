@@ -4,6 +4,8 @@
 
 ## 运行展示
 
+现在可以在Huggingface上试用本程序的[Demo](https://huggingface.co/spaces/SilenWang/ReviewGPT)(需要自备OpenAI API Key)
+
 - 文献准入判断(Screen):
 
 ![demo](img/screen.png)
@@ -44,7 +46,7 @@
 - 杂项:
   - [x] 英文README
   - [ ] 准备Dockfile, 构建容器
-  - [ ] 准备HuggingFace Demo
+  - [x] 准备HuggingFace Demo
 
 ## 问题记录
 

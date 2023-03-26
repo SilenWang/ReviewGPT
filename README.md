@@ -16,6 +16,8 @@ Researchers need to read a large amount of literature every day to keep up with 
 
 ## Demo
 
+[Demo](https://huggingface.co/spaces/SilenWang/ReviewGPT) available on Huggingface, an OpenAI API Key is required
+
 - Screen:
 
 ![demo](img/screen.png)
@@ -56,7 +58,7 @@ Researchers need to read a large amount of literature every day to keep up with 
 - Others:
   - [x] Enhlish README
   - [ ] Dockfile for container building
-  - [ ] A HuggingFace demo
+  - [x] A HuggingFace demo
 
 ## Problems
 
