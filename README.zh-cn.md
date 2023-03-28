@@ -14,6 +14,11 @@
 
 ![demo](img/summarise.png)
 
+- 文献辅助阅读(Study):
+
+![demo](img/study_paper.png)
+![demo](img/study_other.png)
+
 ## 规划内容
 
 
@@ -24,7 +29,7 @@
   + [x] 内容综述功能实装
   + [ ] 增加About页
   + [ ] 增加使用说明(具体怎么加没想好)
-  + [ ] 增加单文献阅读的页面
+  + [x] 增加单文献阅读的页面
 - 后端: 
   + [x] 调用chatGPT的API进行内容综述
   + [x] 调用chatGPT的API进行文献内容准入判断(Meta分析用)
@@ -40,9 +45,9 @@
   + [x] 增加单文献阅读的功能
   + [ ] 增加现有功能的API
 - 参考学习:
-  + [ ] 学习[ResearchGPT](https://github.com/mukulpatnaik/researchgpt)的内容, 增加类似的功能
+  + [x] 学习[ResearchGPT](https://github.com/mukulpatnaik/researchgpt)的内容, 增加类似的功能
   + [ ] 学习[chatPaper](https://github.com/kaixindelele/ChatPaper)的内容, 增加类似的功能
-  + [ ] 尝试构建个[chatPDF](https://www.chatpdf.com/)类似的功能
+  + [ ] ~~尝试构建个[chatPDF](https://www.chatpdf.com/)类似的功能~~
 - 杂项:
   - [x] 英文README
   - [ ] 准备Dockfile, 构建容器

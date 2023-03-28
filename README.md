@@ -1,15 +1,3 @@
----
-title: ReviewGPT
-emoji: 🦀
-colorFrom: purple
-colorTo: blue
-sdk: gradio
-sdk_version: 3.23.0
-app_file: reviewGPT.py
-pinned: true
-license: mit
----
-
 # ReviewGPT
 
 Researchers need to read a large amount of literature every day to keep up with the latest research progress, but the fragmentation of research results is even worse than that of Linux distributions, which slows down research work to some extent. This project aims to use ChatGPT to perform some scientific literature retrieval and work during the reading process, so that related work can be faster and more efficient.
@@ -26,6 +14,10 @@ Researchers need to read a large amount of literature every day to keep up with 
 
 ![demo](img/summarise.png)
 
+- Study:
+
+![demo](img/study_paper.png)
+![demo](img/study_other.png)
 
 ## ToDo
 
@@ -36,7 +28,7 @@ Researchers need to read a large amount of literature every day to keep up with 
   + [x] Implementation of content summarise function
   + [ ] The About page
   + [ ] Add usage instructions
-  + [ ] Paper Reading Page
+  + [x] Paper Reading Page
 - Backend: 
   + [x] Call the chatGPT API for content summarization
   + [x] Call the chatGPT API for literature content access judgment (for meta-analysis)
@@ -52,7 +44,7 @@ Researchers need to read a large amount of literature every day to keep up with 
   + [x] Add the function of reading single paper
   + [ ] Add APIs for existing feature
 - Reference learning:
-  + [ ] Learn the content of[ResearchGPT](https://github.com/mukulpatnaik/researchgpt) and add similar function
+  + [x] Learn the content of[ResearchGPT](https://github.com/mukulpatnaik/researchgpt) and add similar function
   + [ ] Learn the content of[chatPaper](https://github.com/kaixindelele/ChatPaper) and add similar function
   + [ ] ~~Try build something like [chatPDF](https://www.chatpdf.com/)~~
 - Others:
