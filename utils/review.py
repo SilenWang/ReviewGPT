@@ -79,17 +79,20 @@ class Reviewer:
         return self.query()
 
 
-    def summarise(self, papers):
+    def summarise(self, papers, prompts):
         '''
         meta分析时用的方法, 读取标准内容和文献摘要后,
         判断文章是否符合准入标准
         '''
         units = []
-        for idx, abstract in papers:
-            units.append(Prompts['Summarize_Unit'].format(idx=idx, abstract=abstract))
-        units.append(Prompts['Summarize'].format(idx=len(papers)))
-        
-        message = '\n'.join(units)
+        for idx, (paper_id, abstract) in enumerate(papers):
+            units.append(Prompts['Summarize_Unit'].format(
+                idx=idx, 
+                paper_id=paper_id,
+                abstract=abstract
+            ))
+        paper_text = '\n'.join(units)
+        message = Prompts['Summarize'].format(idx=len(papers), papers=paper_text, questions=prompts)
         self.messages = [
             {"role": "user", "content": message},
         ]

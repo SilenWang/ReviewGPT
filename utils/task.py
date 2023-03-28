@@ -75,7 +75,7 @@ def review(task, paper_info, prompts, openai_key, review_model):
                 papers.append((rec['DOI'], rec['Abstract']))
             else:
                 raise Exception('No PMID nor DOI in record.')
-        response = reviewer.summarise(papers)
+        response = reviewer.summarise(papers, prompts)
         return response['choices'][0]['message']['content']
 
 
