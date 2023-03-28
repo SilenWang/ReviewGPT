@@ -2,7 +2,7 @@ import pdfplumber
 import pandas as pd
 from openai.embeddings_utils import get_embedding
 import openai
-from config import OPENAI_KEY
+from utils.config import OPENAI_KEY
 
 class PdfFile:
     '''
