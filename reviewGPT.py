@@ -63,6 +63,42 @@ with gr.Blocks() as reviewGPT:
             input_form, task_choice, prompts, pmids, ris_file, share_settings
         ], outputs=out)
     
+
+    with gr.Tab("Study"): # 文献阅读页面用聊天机器人形式
+        with gr.Row():
+            with gr.Column(scale=0.2):
+                pdf_file = gr.File(label="Please Select PDF File", visible=True, file_types=['.pdf'], type='binary')
+                mode = gr.Radio(
+                    ["Paper", 'Other'], value = "Paper", label="Query Mode", interactive=True
+                )
+                clear = gr.Button("Clear Dialog")
+
+            with gr.Column(scale=0.8):
+                chatbot = gr.Chatbot().style(height=350)
+                with gr.Row():
+                    msg = gr.Textbox(label='Query')
+
+                def user(user_message, history):
+                    return "", history + [[user_message, None]] # 第一个字段是输入框
+
+                def bot(history, pdf_data, mode, share_settings):
+                    question = history[-1][0]
+                    if mode == 'Paper':
+                        bot_message = task.study(pdf_data, question, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
+                        history[-1][1] = bot_message # 将回复添加到最后
+                    elif mode == 'Other':
+                        bot_message = task.query(question, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
+                        history[-1][1] = bot_message # 将回复添加到最后
+                    else:
+                        raise Exception('Invalid Query Mode')
+                    return history
+
+                msg.submit(user, [msg, chatbot], [msg, chatbot], queue=False).then(
+                    bot, [chatbot, pdf_file, mode, share_settings], chatbot
+                )
+                clear.click(lambda: None, None, chatbot, queue=False)
+
+
     with gr.Tab("Setting"):
 
         # gr.Text('Model Selection(not effective now)')
@@ -99,6 +135,7 @@ with gr.Blocks() as reviewGPT:
             inputs=[openai_key, review_model, email, share_settings],
             outputs=[share_settings, notice]
         )
+
 
 
 reviewGPT.launch()

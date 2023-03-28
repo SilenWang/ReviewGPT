@@ -28,7 +28,6 @@ class PdfFile:
         all_text = []
         openai.api_key = self.api_key
         for page in self.pdf_file.pages:
-            print(page.dedupe_chars().extract_text(layout=True))
             all_text.append({
                 'page': page.page_number,
                 'text': page.dedupe_chars().extract_text(layout=True)
@@ -48,6 +47,6 @@ class PdfFile:
 
 
 if __name__ == '__main__':
-    pdf = PdfFile(file='/home/silen/git_proj/ReviewGPT/test/demo_paper.pdf', )
+    pdf = PdfFile(file='/home/silen/git_proj/ReviewGPT/test/demo_paper.pdf')
     print(pdf.parse_info())
     

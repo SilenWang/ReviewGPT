@@ -46,16 +46,22 @@ class Reviewer:
         self.messages = None
 
 
-    def query(self):
+    def query(self, msg=None):
         '''
         发送请求并获取chatGPT给的结果
         '''
         # 设置email和搜索关键词
         openai.api_key = self.api_key
-        response = openai.ChatCompletion.create(
-            model = self.model,
-            messages = self.messages
-        )
+        if msg:
+            response = openai.ChatCompletion.create(
+                model = self.model,
+                messages =  [{"role": "user", "content": msg}]
+            )
+        else:
+            response = openai.ChatCompletion.create(
+                model = self.model,
+                messages = self.messages
+            )
 
         return response
 
@@ -91,7 +97,7 @@ class Reviewer:
         return self.query()
 
 
-    def review(self, question: str, paper_data: pd.DataFrame, top: int = 2):
+    def study(self, question: str, paper_data: pd.DataFrame, top: int = 2):
         '''
         阅读文献的部分内容, 给出问题的回答
         step1, 根据问题, 计算embedding

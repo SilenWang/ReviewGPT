@@ -1,3 +1,7 @@
+'''
+这个文件里的所有内容其实应该精简以后全部放在ReviewerBot下
+'''
+
 from json import loads
 import pandas as pd
 import io
@@ -5,6 +9,7 @@ import io
 from utils.review  import Reviewer
 from utils.pubmed  import PubMedFetcher
 from utils.ris_parser  import RisFile
+from utils.pdf_parser  import PdfFile
 
 
 def get_paper_info(inputMethod, email=None, pmids=None, ris_data=None):
@@ -72,3 +77,18 @@ def review(task, paper_info, prompts, openai_key, review_model):
                 raise Exception('No PMID nor DOI in record.')
         response = reviewer.summarise(papers)
         return response['choices'][0]['message']['content']
+
+
+def study(pdf_data, prompts, openai_key, review_model):
+    reviewer = Reviewer(api_key=openai_key, model=review_model)
+    fileHandle = io.BytesIO(pdf_data)
+    pdf = PdfFile(file=fileHandle)
+    paper_data = pdf.parse_info()
+    response = reviewer.study(prompts, paper_data)
+    return response['choices'][0]['message']['content']
+
+
+def query(prompts, openai_key, review_model):
+    reviewer = Reviewer(api_key=openai_key, model=review_model)
+    response = reviewer.query(prompts)
+    return response['choices'][0]['message']['content']
