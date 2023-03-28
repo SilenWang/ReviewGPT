@@ -37,7 +37,7 @@
     + [ ] chatGLM
     + [ ] moss
     + [ ] LLaMA
-  + [ ] 增加单文献阅读的功能
+  + [x] 增加单文献阅读的功能
   + [ ] 增加现有功能的API
 - 参考学习:
   + [ ] 学习[ResearchGPT](https://github.com/mukulpatnaik/researchgpt)的内容, 增加类似的功能
@@ -47,6 +47,17 @@
   - [x] 英文README
   - [ ] 准备Dockfile, 构建容器
   - [x] 准备HuggingFace Demo
+  - [ ] 效仿[chatPaper](https://github.com/kaixindelele/ChatPaper)增加网络任务的错误处理(tenacity)
+
+## 学习内容
+
+### ResearchGPT功能实现原理
+
+- 借助chatGPT解读可知, ResearchGPT的实现方式为:
+  + 将文件内容**按页**转换为文本
+  + 调用`text-embedding-ada-002`进行文本embedding矩阵计算
+  + 将问题也转换为矩阵, 与每个页面的矩阵计算相似性
+  + 将相似性最高的3个页面与提出的问题一起给chatGPT接口, 实现文献解读
 
 ## 问题记录
 

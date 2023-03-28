@@ -36,7 +36,7 @@ Researchers need to read a large amount of literature every day to keep up with 
   + [x] Implementation of content summarise function
   + [ ] The About page
   + [ ] Add usage instructions
-  + [ ] Add a page for reading single paper
+  + [ ] Paper Reading Page
 - Backend: 
   + [x] Call the chatGPT API for content summarization
   + [x] Call the chatGPT API for literature content access judgment (for meta-analysis)
@@ -49,16 +49,25 @@ Researchers need to read a large amount of literature every day to keep up with 
     + [ ] chatGLM
     + [ ] moss
     + [ ] LLaMA
-  + [ ] Add the function of reading single paper
+  + [x] Add the function of reading single paper
   + [ ] Add APIs for existing feature
 - Reference learning:
   + [ ] Learn the content of[ResearchGPT](https://github.com/mukulpatnaik/researchgpt) and add similar function
   + [ ] Learn the content of[chatPaper](https://github.com/kaixindelele/ChatPaper) and add similar function
-  + [ ] Try build something like [chatPDF](https://www.chatpdf.com/)
+  + [ ] ~~Try build something like [chatPDF](https://www.chatpdf.com/)~~
 - Others:
   - [x] Enhlish README
   - [ ] Dockfile for container building
   - [x] A HuggingFace demo
+  - [ ] Add error handling for network tasks, following the example of [chatPaper](https://github.com/kaixindelele/ChatPaper)
+
+## Code Interpretation
+
+- According to chatGPT, the implementation of ResearchGPT is as follows:
+  + Convert file contents by page into text
+  + Call `text-embedding-ada-002` for text embedding matrix calculation
+  + Convert the question into a matrix and calculate the similarity with the matrix of each page
+  + Send the top 3 pages with the highest similarity to the proposed question to the chatGPT interface for literature interpretation
 
 ## Problems
 
