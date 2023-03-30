@@ -28,7 +28,7 @@
   + [ ] 增加原始解析数据下载按钮(json)
   + [x] 内容综述功能实装
   + [ ] 增加About页
-  + [ ] 增加使用说明(具体怎么加没想好)
+  + [x] 增加使用说明
   + [x] 增加单文献阅读的页面
 - 后端: 
   + [x] 调用chatGPT的API进行内容综述
@@ -44,6 +44,7 @@
     + [ ] LLaMA
   + [x] 增加单文献阅读的功能
   + [ ] 增加现有功能的API
+  + [ ] 改进Study功能中的PDF解析模块, 目标是将单位由页变为段落
 - 参考学习:
   + [x] 学习[ResearchGPT](https://github.com/mukulpatnaik/researchgpt)的内容, 增加类似的功能
   + [ ] 学习[chatPaper](https://github.com/kaixindelele/ChatPaper)的内容, 增加类似的功能

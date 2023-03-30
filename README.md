@@ -27,7 +27,7 @@ Researchers need to read a large amount of literature every day to keep up with 
   + [ ] Add a download button for raw parsing data(json) 
   + [x] Implementation of content summarise function
   + [ ] The About page
-  + [ ] Add usage instructions
+  + [x] Add usage instructions
   + [x] Paper Reading Page
 - Backend: 
   + [x] Call the chatGPT API for content summarization
@@ -43,6 +43,7 @@ Researchers need to read a large amount of literature every day to keep up with 
     + [ ] LLaMA
   + [x] Add the function of reading single paper
   + [ ] Add APIs for existing feature
+  + [ ] Improve the PDF parsing module in the Study feature, with the goal of changing the unit from page to paragraph.
 - Reference learning:
   + [x] Learn the content of[ResearchGPT](https://github.com/mukulpatnaik/researchgpt) and add similar function
   + [ ] Learn the content of[chatPaper](https://github.com/kaixindelele/ChatPaper) and add similar function
@@ -56,7 +57,7 @@ Researchers need to read a large amount of literature every day to keep up with 
 ## Code Interpretation
 
 - According to chatGPT, the implementation of ResearchGPT is as follows:
-  + Convert file contents by page into text
+  + Convert file contents **by page** into text
   + Call `text-embedding-ada-002` for text embedding matrix calculation
   + Convert the question into a matrix and calculate the similarity with the matrix of each page
   + Send the top 3 pages with the highest similarity to the proposed question to the chatGPT interface for literature interpretation
