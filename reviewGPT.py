@@ -8,10 +8,13 @@ except ImportError:
     import utils.config_sample as conf
 
 
-# 定义
-TITLE = "# ReviewGPT"
-# 标题下的描述，支持md格式
-DESCRIPTION = "ReviewGPT is an app that use the ChatGPT API to perform paper summarization and aggregation. My goal is to use AI to accelerate the reading and retrieval of papers."
+def load_markdown(base):
+    '''
+    载入页面上的描述内容
+    '''
+    with open(f'lang/{base}.md') as f:
+        content = f.read()
+    return content
 
 
 def load_setting():
@@ -28,10 +31,11 @@ def load_setting():
 with gr.Blocks() as reviewGPT:
     share_settings = gr.State(load_setting()) # 已经转换成字典了
     
-    gr.Markdown(TITLE)
-    gr.Markdown(DESCRIPTION)
+    gr.Markdown(load_markdown('Title'))
 
     with gr.Tab("Review"):
+        with gr.Box():
+            gr.Markdown(load_markdown('Review'))
         with gr.Row():       # 行排列
             with gr.Column():    # 列排列
                 gr.Markdown('### Data Input')
@@ -65,6 +69,8 @@ with gr.Blocks() as reviewGPT:
     
 
     with gr.Tab("Study"): # 文献阅读页面用聊天机器人形式
+        with gr.Box():
+            gr.Markdown(load_markdown('Study'))
         with gr.Row():
             with gr.Column(scale=0.2):
                 pdf_file = gr.File(label="Please Select PDF File", visible=True, file_types=['.pdf'], type='binary')
@@ -100,6 +106,8 @@ with gr.Blocks() as reviewGPT:
 
 
     with gr.Tab("Setting"):
+        with gr.Box():
+            gr.Markdown(load_markdown('Setting'))
 
         # gr.Text('Model Selection(not effective now)')
         # model = gr.Textbox(label="Select a model", interactive=True)
@@ -135,7 +143,6 @@ with gr.Blocks() as reviewGPT:
             inputs=[openai_key, review_model, email, share_settings],
             outputs=[share_settings, notice]
         )
-
 
 
 reviewGPT.launch()
