@@ -82,7 +82,7 @@ def review(task, paper_info, prompts, openai_key, review_model):
 def study(pdf_data, prompts, openai_key, review_model):
     reviewer = Reviewer(api_key=openai_key, model=review_model)
     fileHandle = io.BytesIO(pdf_data)
-    pdf = PdfFile(file=fileHandle)
+    pdf = PdfFile(file=fileHandle, api_key=openai_key)
     paper_data = pdf.parse_info()
     response = reviewer.study(prompts, paper_data)
     return response['choices'][0]['message']['content']

@@ -4,3 +4,6 @@ pandas>=1.2.4
 biopython
 rispy
 pdfplumber
+plotly
+scipy
+scikit-learn
