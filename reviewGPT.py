@@ -1,6 +1,7 @@
 import gradio as gr
 from datetime import datetime
 from utils import task
+import pandas as pd
 
 try:
     import utils.config as conf
@@ -27,9 +28,65 @@ def load_setting():
     return setting
 
 
+def run_review(input_form, task_choice, prompts, pmids, ris_file, share_settings):
+    '''
+    click触发进行文献阅读
+    '''
+    paper_info = task.get_paper_info(input_form, share_settings['EMAIL'], pmids, ris_file)
+    return task.review(task_choice, paper_info, prompts, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
+
+
+def pdf_preprocess(history):
+    '''
+    解析pdf需要一定时间, 因此在对话框中显示
+    提示用户先不要点击页面造成问题(强制措施过后写)
+    '''
+    return history + [[None, 'File uploaded, now pre-preocessing, please do not ask question in paper mode until process is done']] # 第一个字段是输入框
+
+
+def pdf_process(pdf_data, share_settings):
+    '''
+    处理pdf文件为文章数据
+    '''
+    paper_data = task.parse_pdf_info(pdf_data, share_settings['OPENAI_KEY'])
+    return paper_data
+    
+
+def pdf_postprocess(history):
+    '''
+    解析pdf需要一定时间, 因此在对话框中显示
+    提示用户先不要点击页面造成问题(强制措施过后写)
+    '''
+    return history + [[None, 'PDF pre-preocess done, now you can ask question about this paper']] # 第一个字段是输入框
+
+
+def user(user_message, history):
+    '''
+    处理输入框信息
+    '''
+    return "", history + [[user_message, None]] # 第一个字段是输入框
+
+
+def bot(history, paper_data, mode, share_settings):
+    '''
+    根据输入框信息解析后返回处理结果
+    '''
+    question = history[-1][0]
+    if mode == 'Paper':
+        bot_message = task.study(paper_data, question, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
+        history[-1][1] = bot_message # 将回复添加到最后
+    elif mode == 'Other':
+        bot_message = task.query(question, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
+        history[-1][1] = bot_message # 将回复添加到最后
+    else:
+        raise Exception('Invalid Query Mode')
+    return history
+
+
 # 构建Blocks上下文
 with gr.Blocks() as reviewGPT:
     share_settings = gr.State(load_setting()) # 已经转换成字典了
+    pdf_data = gr.State(pd.DataFrame()) # PDF解析数据
     
     gr.Markdown(load_markdown('Title'))
 
@@ -56,19 +113,13 @@ with gr.Blocks() as reviewGPT:
         start = gr.Button(value='REVIEW START')
         out = gr.Markdown()
 
-        def run_review(input_form, task_choice, prompts, pmids, ris_file, share_settings):
-            '''
-            click触发进行文献阅读
-            '''
-            paper_info = task.get_paper_info(input_form, share_settings['EMAIL'], pmids, ris_file)
-            return task.review(task_choice, paper_info, prompts, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
-
         start.click(fn=run_review, inputs=[
             input_form, task_choice, prompts, pmids, ris_file, share_settings
         ], outputs=out)
     
 
     with gr.Tab("Study"): # 文献阅读页面用聊天机器人形式
+        ###### 布局部分 ######
         with gr.Box():
             gr.Markdown(load_markdown('Study'))
         with gr.Row():
@@ -80,29 +131,24 @@ with gr.Blocks() as reviewGPT:
                 clear = gr.Button("Clear Dialog")
 
             with gr.Column(scale=0.8):
-                chatbot = gr.Chatbot().style(height=350)
+                chatbot = gr.Chatbot(
+                    value=[[None, "Hi, I'm a bot to help you read papers, please first upload a pdf file in the left box"]]
+                ).style(height=350)
                 with gr.Row():
                     msg = gr.Textbox(label='Query')
-
-                def user(user_message, history):
-                    return "", history + [[user_message, None]] # 第一个字段是输入框
-
-                def bot(history, pdf_data, mode, share_settings):
-                    question = history[-1][0]
-                    if mode == 'Paper':
-                        bot_message = task.study(pdf_data, question, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
-                        history[-1][1] = bot_message # 将回复添加到最后
-                    elif mode == 'Other':
-                        bot_message = task.query(question, share_settings['OPENAI_KEY'], share_settings['REVIEW_MODEL'])
-                        history[-1][1] = bot_message # 将回复添加到最后
-                    else:
-                        raise Exception('Invalid Query Mode')
-                    return history
-
-                msg.submit(user, [msg, chatbot], [msg, chatbot], queue=False).then(
-                    bot, [chatbot, pdf_file, mode, share_settings], chatbot
-                )
-                clear.click(lambda: None, None, chatbot, queue=False)
+            
+            ###### 响应部分 ######
+            pdf_file.change(
+                pdf_preprocess, chatbot, chatbot
+            ).then(
+                pdf_process, [pdf_file, share_settings], pdf_data
+            ).then(
+                pdf_postprocess, chatbot, chatbot
+            )
+            clear.click(lambda: None, None, chatbot, queue=False)
+            msg.submit(user, [msg, chatbot], [msg, chatbot], queue=False).then(# 这里的用于执行下一个动作
+                bot, [chatbot, pdf_data, mode, share_settings], chatbot
+            )
 
 
     with gr.Tab("Setting"):

@@ -79,11 +79,21 @@ def review(task, paper_info, prompts, openai_key, review_model):
         return response['choices'][0]['message']['content']
 
 
-def study(pdf_data, prompts, openai_key, review_model):
-    reviewer = Reviewer(api_key=openai_key, model=review_model)
+def parse_pdf_info(pdf_data, openai_key):
+    '''
+    调用模块解析PDF, 单独放出来, 解析只需要一次
+    '''
     fileHandle = io.BytesIO(pdf_data)
     pdf = PdfFile(file=fileHandle, api_key=openai_key)
     paper_data = pdf.parse_info()
+    return paper_data
+
+
+def study(paper_data, prompts, openai_key, review_model):
+    '''
+    根据解析好的PDF数据进行阅读
+    '''
+    reviewer = Reviewer(api_key=openai_key, model=review_model)
     response = reviewer.study(prompts, paper_data)
     return response['choices'][0]['message']['content']
 
