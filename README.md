@@ -38,9 +38,9 @@ Researchers need to read a large amount of literature every day to keep up with 
   + [ ] ~~Add multiple repetitions of content access judgment (check whether the result is stable)~~
   + [x] RIS file upload and parsing support
   + [ ] Support for models other than chatGPT
-    + [ ] chatGLM
-    + [ ] moss
-    + [ ] LLaMA
+    + [ ] Kimi
+    + [ ] Doubao
+    + [ ] Ollama
   + [x] Add the function of reading single paper
   + [ ] Add APIs for existing feature
   + [ ] Improve the PDF parsing module in the Study feature, with the goal of changing the unit from page to paragraph.

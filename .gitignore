@@ -2,3 +2,7 @@ conda/
 utils/config.py
 *test*
 *__pycache__*
+
+# pixi environments
+.pixi
+*.egg-info

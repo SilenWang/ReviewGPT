@@ -1,0 +1,18 @@
+[project]
+authors = ["Sylens Wong <qiumin14@163.com>"]
+channels = ["conda-forge"]
+description = "Dependency for ReviewGPT"
+name = "ReviewGPT"
+platforms = ["linux-aarch64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "*"
+gradio = "*"
+pandas = "*"
+openai = "*"
+pdfplumber = "*"
+biopython = "*"
+tiktoken = "*"
