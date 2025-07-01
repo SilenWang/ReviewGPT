@@ -4,7 +4,7 @@ channels = ["conda-forge"]
 description = "Dependency for ReviewGPT"
 name = "ReviewGPT"
 platforms = ["linux-aarch64", "linux-64"]
-version = "0.1.0"
+version = "0.1.1"
 
 [tasks]
 
@@ -12,7 +12,11 @@ version = "0.1.0"
 python = "*"
 gradio = "*"
 pandas = "*"
-openai = "*"
+openai = "0.27.*"
 pdfplumber = "*"
 biopython = "*"
 tiktoken = "*"
+nicegui = ">=2.0"
+
+[pypi-dependencies]
+rispy = "*"

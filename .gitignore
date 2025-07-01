@@ -6,3 +6,4 @@ utils/config.py
 # pixi environments
 .pixi
 *.egg-info
+.aider*
