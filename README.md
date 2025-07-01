@@ -21,6 +21,11 @@ Researchers need to read a large amount of literature every day to keep up with 
 
 ## ToDo
 
+- New feature planning:
+  1. Automatically optimize prompts for the proposed topics/subjects and generate specific research tasks.
+  2. Handle tasks by different agents.
+  3. Aggregate the processing results of agents.
+
 - Frontend:
   + [ ] Adjust the NiceGUI interface and beautify the layout
   + [ ] Add a download button for raw parsing data(json) 
